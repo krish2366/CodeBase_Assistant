@@ -6,9 +6,10 @@ import ProjectSelector from "../components/ProjectSelector";
 import QuestionBox from "../components/QuestionBox";
 import AnswerPanel from "../components/AnswerPanel";
 import IngestForm from "../components/IngestForm";
+import type { Project } from "../types/Project";
 
 export default function Home() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [projectId, setProjectId] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<any>(null);
@@ -16,7 +17,7 @@ export default function Home() {
 
   const refreshProjects = async() =>{
     const res = await getProjects();
-    setProjects(res.projects);
+    setProjects(res.projects ?? []);
   }
 
   useEffect(() => {
